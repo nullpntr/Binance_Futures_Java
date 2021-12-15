@@ -10,12 +10,22 @@ public class BinanceApiConstants {
     /**
      * REST API base URL.
      */
-    public static final String API_BASE_URL = "https://fapi.binance.com";
+    public static final String API_BASE_URL_USD_MARGINED = "https://fapi.binance.com";
 
     /**
      * Streaming API base URL.
      */
-    public static final String WS_API_BASE_URL = "wss://fstream.binance.com/ws";
+    public static final String WS_API_BASE_URL_USD_MARGINED = "wss://fstream.binance.com/ws";
+
+    /**
+     * REST API base URL.
+     */
+    public static final String API_BASE_URL_COIN_MARGINED = "https://dapi.binance.com";
+
+    /**
+     * Streaming API base URL.
+     */
+    public static final String WS_API_BASE_URL_COIN_MARGINED = "wss://dstream.binance.com/ws";
 
     /**
      * HTTP Header to be used for API-KEY authentication.

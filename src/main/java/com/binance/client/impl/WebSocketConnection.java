@@ -1,15 +1,13 @@
 package com.binance.client.impl;
 
+import com.binance.client.exception.BinanceApiException;
+import com.binance.client.impl.utils.JsonWrapper;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.binance.client.constant.BinanceApiConstants;
-import com.binance.client.exception.BinanceApiException;
-import com.binance.client.impl.utils.JsonWrapper;
 
 public class WebSocketConnection extends WebSocketListener {
 
@@ -34,14 +32,12 @@ public class WebSocketConnection extends WebSocketListener {
     private final int connectionId;
     private final boolean autoClose;
 
-    private String subscriptionUrl = BinanceApiConstants.WS_API_BASE_URL;
-
-    WebSocketConnection(WebsocketRequest request,
+    WebSocketConnection(String subscriptionUrl, WebsocketRequest request,
             WebSocketWatchDog watchDog) {
-        this(request, watchDog, false);
+        this(subscriptionUrl, request, watchDog, false);
     }
 
-    WebSocketConnection(WebsocketRequest request, WebSocketWatchDog watchDog, boolean autoClose) {
+    WebSocketConnection(String subscriptionUrl, WebsocketRequest request, WebSocketWatchDog watchDog, boolean autoClose) {
         this.connectionId = WebSocketConnection.connectionCounter++;
         this.request = request;
         this.autoClose = autoClose;

@@ -1,5 +1,6 @@
 package com.binance.client;
 
+import com.binance.client.constant.BinanceApiConstants;
 import com.binance.client.exception.BinanceApiException;
 import java.net.URI;
 
@@ -8,7 +9,7 @@ import java.net.URI;
  */
 public class SubscriptionOptions {
 
-    private String uri = "wss://api.binance.pro/";
+    private String uri = BinanceApiConstants.WS_API_BASE_URL_USD_MARGINED;
     private boolean isAutoReconnect = true;
     private int receiveLimitMs = 300_000;
     private int connectionDelayOnFailure = 15;

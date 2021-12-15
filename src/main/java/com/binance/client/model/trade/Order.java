@@ -1,15 +1,18 @@
 package com.binance.client.model.trade;
 
 import com.binance.client.constant.BinanceApiConstants;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import java.math.BigDecimal;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Order {
 
     private String clientOrderId;
 
+    private BigDecimal cumQty;
+
     private BigDecimal cumQuote;
+
+    private BigDecimal cumBase;
 
     private BigDecimal executedQty;
 
@@ -47,8 +50,24 @@ public class Order {
         this.clientOrderId = clientOrderId;
     }
 
+    public BigDecimal getCumQty() {
+        return cumQty;
+    }
+
+    public void setCumQty(BigDecimal cumQty) {
+        this.cumQty = cumQty;
+    }
+
     public BigDecimal getCumQuote() {
         return cumQuote;
+    }
+
+    public BigDecimal getCumBase() {
+        return cumBase;
+    }
+
+    public void setCumBase(BigDecimal cumBase) {
+        this.cumBase = cumBase;
     }
 
     public void setCumQuote(BigDecimal cumQuote) {
@@ -170,7 +189,8 @@ public class Order {
     @Override
     public String toString() {
         return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
-                .append("clientOrderId", clientOrderId).append("cumQuote", cumQuote).append("executedQty", executedQty)
+                .append("clientOrderId", clientOrderId).append("cumQty", cumQty)
+                .append("cumQuote", cumQuote).append("cumBase", cumBase).append("executedQty", executedQty)
                 .append("orderId", orderId).append("origQty", origQty).append("price", price)
                 .append("reduceOnly", reduceOnly).append("side", side).append("positionSide", positionSide).append("status", status)
                 .append("stopPrice", stopPrice).append("symbol", symbol).append("timeInForce", timeInForce)

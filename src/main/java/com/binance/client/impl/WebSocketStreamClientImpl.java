@@ -14,7 +14,6 @@ import com.binance.client.model.event.SymbolBookTickerEvent;
 import com.binance.client.model.event.SymbolMiniTickerEvent;
 import com.binance.client.model.event.SymbolTickerEvent;
 import com.binance.client.model.user.UserDataUpdateEvent;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -39,7 +38,7 @@ public class WebSocketStreamClientImpl implements SubscriptionClient {
         if (watchDog == null) {
             watchDog = new WebSocketWatchDog(options);
         }
-        WebSocketConnection connection = new WebSocketConnection(request, watchDog, autoClose);
+        WebSocketConnection connection = new WebSocketConnection(options.getUri(), request, watchDog, autoClose);
         if (autoClose == false) {
             connections.add(connection);
         }
