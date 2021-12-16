@@ -1,11 +1,10 @@
 package com.binance.client;
 
-import java.util.List;
-
 import com.binance.client.impl.BinanceApiInternalFactory;
 import com.binance.client.model.enums.CandlestickInterval;
 import com.binance.client.model.event.AggregateTradeEvent;
 import com.binance.client.model.event.CandlestickEvent;
+import com.binance.client.model.event.IndexPriceEvent;
 import com.binance.client.model.event.LiquidationOrderEvent;
 import com.binance.client.model.event.MarkPriceEvent;
 import com.binance.client.model.event.OrderBookEvent;
@@ -13,6 +12,7 @@ import com.binance.client.model.event.SymbolBookTickerEvent;
 import com.binance.client.model.event.SymbolMiniTickerEvent;
 import com.binance.client.model.event.SymbolTickerEvent;
 import com.binance.client.model.user.UserDataUpdateEvent;
+import java.util.List;
 
 /***
  * The subscription client interface, it is used for subscribing any market data
@@ -58,6 +58,9 @@ public interface SubscriptionClient {
      */
     void subscribeAggregateTradeEvent(String symbol,
             SubscriptionListener<AggregateTradeEvent> callback, SubscriptionErrorHandler errorHandler);
+
+    void subscribeIndexPriceEvent(String symbol,
+        SubscriptionListener<IndexPriceEvent> callback, SubscriptionErrorHandler errorHandler);
 
     /**
      * Subscribe mark price event. If the mark price is updated,

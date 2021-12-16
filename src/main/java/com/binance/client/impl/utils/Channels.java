@@ -18,7 +18,17 @@ public abstract class Channels {
         json.put("method", "SUBSCRIBE");
         return json.toJSONString();
     }
-  
+
+    public static String indexPriceChannel(String symbol) {
+        JSONObject json = new JSONObject();
+        JSONArray params = new JSONArray();
+        params.add(symbol + "@indexPrice");
+        json.put("params", params);
+        json.put("id", System.currentTimeMillis());
+        json.put("method", "SUBSCRIBE");
+        return json.toJSONString();
+    }
+
     public static String markPriceChannel(String symbol) {
         JSONObject json = new JSONObject();
         JSONArray params = new JSONArray();
@@ -28,7 +38,7 @@ public abstract class Channels {
         json.put("method", "SUBSCRIBE");
         return json.toJSONString();
     }
-  
+
     public static String candlestickChannel(String symbol, CandlestickInterval interval) {
         JSONObject json = new JSONObject();
         JSONArray params = new JSONArray();

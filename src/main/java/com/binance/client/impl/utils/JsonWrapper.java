@@ -6,11 +6,11 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.binance.client.exception.BinanceApiException;
 import java.math.BigDecimal;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 
 public class JsonWrapper {
 
@@ -154,7 +154,8 @@ public class JsonWrapper {
     public BigDecimal getBigDecimal(String name) {
         checkMandatoryField(name);
         try {
-            return new BigDecimal(json.getBigDecimal(name).stripTrailingZeros().toPlainString());
+            BigDecimal decimalVal = json.getBigDecimal(name);
+            return decimalVal == null ? decimalVal : new BigDecimal(decimalVal.stripTrailingZeros().toPlainString());
         } catch (Exception e) {
             throw new BinanceApiException(BinanceApiException.RUNTIME_ERROR,
                     "[Json] Get decimal error: " + name + " " + e.getMessage());

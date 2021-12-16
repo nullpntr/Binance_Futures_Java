@@ -1,18 +1,14 @@
 package com.binance.client.impl;
 
-import java.math.BigDecimal;
-import java.util.LinkedList;
-import java.util.List;
-
-import com.binance.client.impl.utils.JsonWrapper;
-import com.binance.client.impl.utils.JsonWrapperArray;
-
 import com.binance.client.SubscriptionErrorHandler;
 import com.binance.client.SubscriptionListener;
 import com.binance.client.impl.utils.Channels;
+import com.binance.client.impl.utils.JsonWrapper;
+import com.binance.client.impl.utils.JsonWrapperArray;
 import com.binance.client.model.enums.CandlestickInterval;
 import com.binance.client.model.event.AggregateTradeEvent;
 import com.binance.client.model.event.CandlestickEvent;
+import com.binance.client.model.event.IndexPriceEvent;
 import com.binance.client.model.event.LiquidationOrderEvent;
 import com.binance.client.model.event.MarkPriceEvent;
 import com.binance.client.model.event.OrderBookEvent;
@@ -25,6 +21,9 @@ import com.binance.client.model.user.BalanceUpdate;
 import com.binance.client.model.user.OrderUpdate;
 import com.binance.client.model.user.PositionUpdate;
 import com.binance.client.model.user.UserDataUpdateEvent;
+import java.math.BigDecimal;
+import java.util.LinkedList;
+import java.util.List;
 
 class WebsocketRequestImpl {
 
@@ -53,6 +52,27 @@ class WebsocketRequestImpl {
             result.setLastId(jsonWrapper.getLong("l"));
             result.setTime(jsonWrapper.getLong("T"));
             result.setIsBuyerMaker(jsonWrapper.getBoolean("m"));
+            return result;
+        };
+        return request;
+    }
+
+    WebsocketRequest<IndexPriceEvent> subscribeIndexPriceEvent(String symbol,
+        SubscriptionListener<IndexPriceEvent> subscriptionListener,
+        SubscriptionErrorHandler errorHandler) {
+        InputChecker.checker()
+            .shouldNotNull(symbol, "symbol")
+            .shouldNotNull(subscriptionListener, "listener");
+        WebsocketRequest<IndexPriceEvent> request = new WebsocketRequest<>(subscriptionListener, errorHandler);
+        request.name = "***Index Price for " + symbol + "***";
+        request.connectionHandler = (connection) -> connection.send(Channels.indexPriceChannel(symbol));
+
+        request.jsonParser = (jsonWrapper) -> {
+            IndexPriceEvent result = new IndexPriceEvent();
+            result.setEventType(jsonWrapper.getString("e"));
+            result.setEventTime(jsonWrapper.getLong("E"));
+            result.setSymbol(jsonWrapper.getString("i"));
+            result.setIndexPrice(jsonWrapper.getBigDecimal("p"));
             return result;
         };
         return request;
