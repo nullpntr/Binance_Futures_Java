@@ -8,49 +8,16 @@ import com.binance.client.exception.BinanceApiException;
 import com.binance.client.impl.utils.JsonWrapperArray;
 import com.binance.client.impl.utils.UrlParamsBuilder;
 import com.binance.client.model.ResponseResult;
-import com.binance.client.model.enums.CandlestickInterval;
-import com.binance.client.model.enums.IncomeType;
-import com.binance.client.model.enums.NewOrderRespType;
-import com.binance.client.model.enums.OrderSide;
-import com.binance.client.model.enums.OrderType;
-import com.binance.client.model.enums.PeriodType;
-import com.binance.client.model.enums.PositionSide;
-import com.binance.client.model.enums.TimeInForce;
-import com.binance.client.model.enums.WorkingType;
-import com.binance.client.model.market.AggregateTrade;
-import com.binance.client.model.market.Candlestick;
-import com.binance.client.model.market.CommonLongShortRatio;
-import com.binance.client.model.market.ExchangeFilter;
-import com.binance.client.model.market.ExchangeInfoEntry;
-import com.binance.client.model.market.ExchangeInformation;
-import com.binance.client.model.market.FundingRate;
-import com.binance.client.model.market.LiquidationOrder;
-import com.binance.client.model.market.MarkPrice;
-import com.binance.client.model.market.OpenInterestStat;
-import com.binance.client.model.market.OrderBook;
-import com.binance.client.model.market.OrderBookEntry;
-import com.binance.client.model.market.PriceChangeTicker;
-import com.binance.client.model.market.RateLimit;
-import com.binance.client.model.market.SymbolOrderBook;
-import com.binance.client.model.market.SymbolPrice;
-import com.binance.client.model.market.TakerLongShortStat;
-import com.binance.client.model.market.Trade;
-import com.binance.client.model.trade.AccountBalance;
-import com.binance.client.model.trade.AccountInformation;
-import com.binance.client.model.trade.Asset;
-import com.binance.client.model.trade.Income;
-import com.binance.client.model.trade.Leverage;
-import com.binance.client.model.trade.MyTrade;
-import com.binance.client.model.trade.Order;
-import com.binance.client.model.trade.Position;
-import com.binance.client.model.trade.PositionRisk;
-import com.binance.client.model.trade.WalletDeltaLog;
+import com.binance.client.model.enums.*;
+import com.binance.client.model.market.*;
+import com.binance.client.model.trade.*;
+import okhttp3.Request;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import okhttp3.Request;
-import org.apache.commons.lang3.StringUtils;
 
 class RestApiRequestImpl implements ClientRestApiRequest {
 
@@ -1112,10 +1079,11 @@ class RestApiRequestImpl implements ClientRestApiRequest {
     }
 
     @Override
-    public RestApiRequest<List<PositionRisk>> getPositionRisk() {
+    public RestApiRequest<List<PositionRisk>> getPositionRisk(String symbol) {
         RestApiRequest<List<PositionRisk>> request = new RestApiRequest<>();
-        UrlParamsBuilder builder = UrlParamsBuilder.build();
-        request.request = createRequestByGetWithSignature("/fapi/v1/positionRisk", builder);
+        UrlParamsBuilder builder = UrlParamsBuilder.build()
+                .putToUrl("symbol", symbol);
+        request.request = createRequestByGetWithSignature("/fapi/v2/positionRisk", builder);
 
         request.jsonParser = (jsonWrapper -> {
             List<PositionRisk> result = new LinkedList<>();
