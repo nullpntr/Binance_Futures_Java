@@ -7,9 +7,19 @@ import java.util.List;
 
 public class AccountUpdate {
 
+    private String eventReasonType;
+
     private List<BalanceUpdate> balances;
 
     private List<PositionUpdate> positions;
+
+    public String getEventReasonType() {
+        return eventReasonType;
+    }
+
+    public void setEventReasonType(String eventReasonType) {
+        this.eventReasonType = eventReasonType;
+    }
 
     public List<BalanceUpdate> getBalances() {
         return balances;
@@ -29,7 +39,9 @@ public class AccountUpdate {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("balances", balances)
+        return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
+                .append("eventReasonType", eventReasonType)
+                .append("balances", balances)
                 .append("positions", positions).toString();
     }
 }
