@@ -3,10 +3,9 @@ package com.binance.client.model.market;
 import com.binance.client.constant.BinanceApiConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-
-import java.math.BigDecimal;
 
 public class ExchangeInfoEntry {
 
@@ -34,7 +33,7 @@ public class ExchangeInfoEntry {
 
     private List<String> timeInForce;
 
-    private List<List<Map<String, String>>> filters;
+    private List<Map<String, String>> filters;
 
     public String getSymbol() {
         return symbol;
@@ -132,11 +131,11 @@ public class ExchangeInfoEntry {
         this.timeInForce = timeInForce;
     }
 
-    public List<List<Map<String, String>>> getFilters() {
+    public List<Map<String, String>> getFilters() {
         return filters;
     }
 
-    public void setFilters(List<List<Map<String, String>>> filters) {
+    public void setFilters(List<Map<String, String>> filters) {
         this.filters = filters;
     }
 

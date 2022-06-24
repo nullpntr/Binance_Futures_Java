@@ -5,12 +5,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.binance.client.exception.BinanceApiException;
+
 import java.math.BigDecimal;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class JsonWrapper {
 
@@ -207,15 +206,8 @@ public class JsonWrapper {
         return json;
     }
 
-    public List<Map<String, String>> convert2DictList() {
-        List<Map<String, String>> result = new LinkedList<>();
-        Set<String> keys = this.json.keySet();
-        keys.forEach((key) -> {
-            Map<String, String> temp = new LinkedHashMap<>();
-            temp.put(key, this.getString(key));
-            result.add(temp);
-        });
-        return result;
+    public Map<String, String> convertToMap() {
+        return this.json.keySet().stream().collect(Collectors.toMap(Function.identity(), this::getString));
     }
 
 }
