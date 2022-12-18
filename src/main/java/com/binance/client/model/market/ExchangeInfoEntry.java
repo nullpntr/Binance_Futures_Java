@@ -11,6 +11,8 @@ public class ExchangeInfoEntry {
 
     private String symbol;
 
+    private String contractType;
+
     private String status;
 
     private BigDecimal maintMarginPercent;
@@ -41,6 +43,14 @@ public class ExchangeInfoEntry {
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
+    }
+
+    public String getContractType() {
+        return contractType;
+    }
+
+    public void setContractType(String contractType) {
+        this.contractType = contractType;
     }
 
     public String getStatus() {
@@ -142,6 +152,7 @@ public class ExchangeInfoEntry {
     @Override
     public String toString() {
         return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("symbol", symbol)
+                .append("contractType", contractType)
                 .append("status", status).append("maintMarginPercent", maintMarginPercent)
                 .append("requiredMarginPercent", requiredMarginPercent).append("baseAsset", baseAsset)
                 .append("quoteAsset", quoteAsset).append("pricePrecision", pricePrecision)

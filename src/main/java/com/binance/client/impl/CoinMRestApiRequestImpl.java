@@ -196,6 +196,7 @@ class CoinMRestApiRequestImpl implements ClientRestApiRequest {
             symbolArray.forEach((item) -> {
                 ExchangeInfoEntry symbol = new ExchangeInfoEntry();
                 symbol.setSymbol(item.getString("symbol"));
+                symbol.setContractType(item.getString("contractType"));
                 symbol.setStatus(item.getString("contractStatus"));
                 symbol.setMaintMarginPercent(item.getBigDecimal("maintMarginPercent"));
                 symbol.setRequiredMarginPercent(item.getBigDecimal("requiredMarginPercent"));
