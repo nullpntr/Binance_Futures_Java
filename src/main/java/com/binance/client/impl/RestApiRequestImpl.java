@@ -979,7 +979,7 @@ class RestApiRequestImpl implements ClientRestApiRequest {
     public RestApiRequest<List<AccountBalance>> getBalance() {
         RestApiRequest<List<AccountBalance>> request = new RestApiRequest<>();
         UrlParamsBuilder builder = UrlParamsBuilder.build();
-        request.request = createRequestByGetWithSignature("/fapi/v1/balance", builder);
+        request.request = createRequestByGetWithSignature("/fapi/v2/balance", builder);
 
         request.jsonParser = (jsonWrapper -> {
             List<AccountBalance> result = new LinkedList<>();
@@ -988,7 +988,8 @@ class RestApiRequestImpl implements ClientRestApiRequest {
                 AccountBalance element = new AccountBalance();
                 element.setAsset(item.getString("asset"));
                 element.setBalance(item.getBigDecimal("balance"));
-                element.setWithdrawAvailable(item.getBigDecimal("withdrawAvailable"));
+                element.setAvailableBalance(item.getBigDecimal("availableBalance"));
+                element.setMaxWithdrawAmount(item.getBigDecimal("maxWithdrawAmount"));
                 result.add(element);
             });
             return result;

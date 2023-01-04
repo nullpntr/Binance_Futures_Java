@@ -11,7 +11,9 @@ public class AccountBalance {
 
     private BigDecimal balance;
 
-    private BigDecimal withdrawAvailable;
+    private BigDecimal availableBalance;
+
+    private BigDecimal maxWithdrawAmount;
 
     public String getAsset() {
         return asset;
@@ -29,17 +31,26 @@ public class AccountBalance {
         this.balance = balance;
     }
 
-    public BigDecimal getWithdrawAvailable() {
-        return withdrawAvailable;
+    public BigDecimal getAvailableBalance() {
+        return availableBalance;
     }
 
-    public void setWithdrawAvailable(BigDecimal withdrawAvailable) {
-        this.withdrawAvailable = withdrawAvailable;
+    public void setAvailableBalance(BigDecimal availableBalance) {
+        this.availableBalance = availableBalance;
+    }
+
+    public BigDecimal getMaxWithdrawAmount() {
+        return maxWithdrawAmount;
+    }
+
+    public void setMaxWithdrawAmount(BigDecimal maxWithdrawAmount) {
+        this.maxWithdrawAmount = maxWithdrawAmount;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE).append("asset", asset)
-                .append("balance", balance).append("withdrawAvailable", withdrawAvailable).toString();
+                .append("balance", balance).append("availableBalance", availableBalance)
+                .append("maxWithdrawAmount", maxWithdrawAmount).toString();
     }
 }
