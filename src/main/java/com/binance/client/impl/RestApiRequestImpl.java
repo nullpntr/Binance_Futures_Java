@@ -654,6 +654,7 @@ class RestApiRequestImpl implements ClientRestApiRequest {
             result.setOrderId(jsonWrapper.getLong("orderId"));
             result.setOrigQty(jsonWrapper.getBigDecimal("origQty"));
             result.setPrice(jsonWrapper.getBigDecimal("price"));
+            result.setAvgPrice(jsonWrapper.getBigDecimal("avgPrice"));
             result.setReduceOnly(jsonWrapper.getBoolean("reduceOnly"));
             result.setSide(jsonWrapper.getString("side"));
             result.setPositionSide(jsonWrapper.getString("positionSide"));
@@ -958,6 +959,7 @@ class RestApiRequestImpl implements ClientRestApiRequest {
                 element.setOrderId(item.getLong("orderId"));
                 element.setOrigQty(item.getBigDecimal("origQty"));
                 element.setPrice(item.getBigDecimal("price"));
+                element.setAvgPrice(item.getBigDecimal("avgPrice"));
                 element.setReduceOnly(item.getBoolean("reduceOnly"));
                 element.setSide(item.getString("side"));
                 element.setPositionSide(item.getString("positionSide"));
